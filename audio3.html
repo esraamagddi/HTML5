@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Media Player</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+
+        #container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        audio, img {
+            width: 300px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        input[type="range"] {
+            width: 80%;
+            margin-bottom: 10px;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            width: 30%;
+        }
+
+        .controls label {
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <img src="https://i.pinimg.com/236x/97/fc/7f/97fc7fd0c16d71ecf115129083d9c67d.jpg" alt="Cover Image">
+
+        <audio loop autoplay controls playbackRate="1">
+            <source src="resources/1.mp3"/>
+            <!-- <source src="resources/1.ogg"/> -->
+            Please update your browser.
+        </audio>
+
+        <div class="controls">
+            <button id="play">Play</button>
+            <button id="pause">Pause</button>
+            <button id="stop">Stop</button>
+            <button id="mute">Mute</button>
+        </div>
+
+        <label for="volume">Volume</label>
+        <input type="range" min="0" max="1" step=".1" id="volume" value="1"/>
+
+        <label for="duration">Duration</label>
+        <input type="range" min="0" max="" id="duration" value="0"/>
+
+        <label for="rate">Rate</label>
+        <input type="range" min=".5" max="2" step=".1" id="rate" value="1"/>
+    </div>
+
+    <script>
+        var audio = document.getElementsByTagName('audio')[0];
+        var btnPlay = document.getElementById('play');
+        var btnPause = document.getElementById('pause');
+        var btnStop = document.getElementById('stop');
+        var btnMute = document.getElementById('mute');
+        var volumeRange = document.getElementById('volume');
+        var durationRange = document.getElementById('duration');
+        var speed = document.getElementById('rate');
+
+        btnPlay.addEventListener('click', function () {
+            audio.play();
+        });
+
+        btnPause.addEventListener('click', function () {
+            audio.pause();
+        });
+
+        btnStop.addEventListener('click', function () {
+            audio.load();
+            audio.pause();
+        });
+
+        btnMute.addEventListener('click', function () {
+            audio.muted = !audio.muted;
+        });
+
+        volumeRange.addEventListener('input', function () {
+            audio.volume = volumeRange.value;
+        });
+
+        window.addEventListener('load', function () {
+            durationRange.max = audio.duration;
+        });
+
+        audio.addEventListener('durationchange', function () {
+            durationRange.max = audio.duration;
+        });
+
+        durationRange.addEventListener('input', function () {
+            audio.currentTime = durationRange.value;
+        });
+
+        speed.addEventListener('input', function () {
+            audio.playbackRate = speed.value;
+        });
+    </script>
+</body>
+</html>

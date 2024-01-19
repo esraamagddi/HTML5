@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Color Range</title>
+
+</head>
+<body>
+
+    <form>
+        <label for="redRange">red:</label>
+        <input type="range" id="greenRange" name="greenRange" min="0" max="255" step="1" value="0" oninput="updateColor('greenRange')">
+
+        <br>
+
+        <label for="greenRange">green:</label>
+        <input type="range" id="redRange" name="redRange" min="0" max="255" step="1" value="0" oninput="updateColor('redRange')">
+
+        <br>
+
+        <label for="blueRange">Blue:</label>
+        <input type="range" id="blueRange" name="blueRange" min="0" max="255" step="1" value="0" oninput="updateColor('blueRange')">
+
+        <br>
+
+        <p id="displayText">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque praesentium architecto facilis ut dolores perferendis veritatis, eum eos adipisci dignissimos quam beatae exercitationem explicabo, deserunt quae maxime magni doloremque iusto!</p>
+    </form>
+
+    <script>
+        function updateColor(rangeId) {
+            var range = document.getElementById(rangeId);
+            var displayText = document.getElementById("displayText");
+
+            if (rangeId === 'greenRange') {
+                displayText.style.color = "rgb(" + range.value + ",0,0)";
+            } else if (rangeId === 'redRange') {
+                displayText.style.color = "rgb(0," + range.value + ",0)";
+            } else if (rangeId === 'blueRange') {
+                displayText.style.color = "rgb(0,0," + range.value + ")";
+            }
+        }
+    </script>
+
+</body>
+</html>
